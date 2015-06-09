@@ -16,3 +16,6 @@ gradle.properties
 # IDE files
 .idea/
 *.iml
+.settings
+.project
+.classpath
