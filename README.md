@@ -1,9 +1,3 @@
-# Not actively maintained
-
-This project is not actively maintained anymore, thanks to everyone who used it/gave feedback/submitted PR. 
-
-If you're using it in an Android project, have a look at [this plugin](https://bitbucket.org/hvisser/android-apt) instead. If you're using it in a java project, changes are that it's working but it won't be updated anymore. Feel free to fork it and add more features to it!
-
 Gradle Apt Plugin
 =================
 
@@ -12,19 +6,19 @@ A Gradle plugin for the Java annotation processor tool.
 Usage
 -------------------
 
-Add the plugin to your `buildscript`'s `dependencies` and add Sonatype's snapshot repository to be able to download it:
+Add the plugin to your `buildscript`'s `dependencies` and add the Jitpack repository to download it:
 
 ```groovy
 buildscript {
   dependencies {
       repositories {
         maven {
-          url "https://oss.sonatype.org/content/repositories/snapshots/"
+          url "https://jitpack.io"
         }
         ...
       }
       
-      classpath 'com.jimdo.gradle:gradle-apt-plugin:{latest-version}'
+      classpath 'com.github.bt:gradle-apt-plugin:{latest-version}'
       ...
   }
 }
@@ -36,11 +30,27 @@ Apply the `apt` plugin:
 
 Add annotation processors dependencies using the `apt` configuration, i.e.:
 
-`apt 'com.squareup.dagger:dagger-compiler:1.1.0'`
+`apt 'com.squareup.dagger:dagger-compiler:2.0.2'`
 
-Run `gradle build` and find the generated files in the `build/sources/apt/` directory (for now not configurable, it will be in the future).
+Run `gradle build`.
+
+By default, the generated files in the `build/source/apt/` directory.
+
+Options
+-------
+
+You can set various options for the plugin. To set the options, after the `apply plugin: 'apt'` line, add the following:
+
+```groovy
+apt {
+  // The output directory for the generated source files.
+  outputDirName = 'build/source/apt'
+}
+```
 
 Credits
 -------
+
+This plugin is a fork of the original project by [@Jimdo](https://github.com/Jimdo/gradle-apt-plugin). As the project was discontinued, I have a need for annotation processing as one of my applications is heavily dependent on [Dagger2](https://google.github.io/dagger/).
 
 This plugin is a slightly modified/cleaned-up version of [this Stackoverflow answer](http://stackoverflow.com/questions/16683944/androidannotations-nothing-generated-empty-activity)
